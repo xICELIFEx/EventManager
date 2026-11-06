@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EventManager.Controllers;
 
+/// <summary>
+/// Контроллер реализующий CRUD операции с Event-тами 
+/// </summary>
 [ApiController]
 [Route("api/[controller]")]
 public class EventsController : ControllerBase
@@ -17,6 +20,11 @@ public class EventsController : ControllerBase
         _eventService = eventService;
     }
 
+    /// <summary>
+    /// Метод возвращает информацию обо всех хранящихся событиях
+    /// </summary>
+    /// <response code="200">Возвращается JSON-структура ApiBaseResult со списком событий
+    /// и HTTP статус-кодом 200 Ok в случае успеха</response>
     [HttpGet]
     public ApiBaseResult GetAllEvents()
     {
@@ -24,6 +32,12 @@ public class EventsController : ControllerBase
             { Data = _eventService.GetAllEvents().Select(e => e.ToDto()).ToList(), StatusCode = HttpStatusCode.OK, Message = "" };
     }
 
+    /// <summary>
+    /// Метод возвращает информацию о событии по его id
+    /// </summary>
+    /// <param name="id">Параметр id, для получения информации о связанном событии</param>
+    /// <response code="200">Возвращается JSON-структура ApiBaseResult с информацией о событии
+    /// и HTTP статус-кодом 200 Ok в случае успеха</response>
     [HttpGet("{id}")]
     public ApiBaseResult GetEventById(int id)
     {
@@ -37,6 +51,12 @@ public class EventsController : ControllerBase
         return responce;
     }
 
+    /// <summary>
+    /// Метод создает новое событие
+    /// </summary>
+    /// <param name="eventDto">Набор данных необходимых для создания нового события</param>
+    /// <response code="200">Возвращается JSON-структура ApiBaseResult с флагом создано событие или нет
+    /// и HTTP статус-кодом 200 Ok в случае успеха</response>
     [HttpPost]
     public ApiBaseResult CreateEvent([FromBody] EventDto eventDto)
     {
@@ -50,6 +70,12 @@ public class EventsController : ControllerBase
         };
     }
 
+    /// <summary>
+    /// Метод обновляет сущевствующее событие
+    /// </summary>
+    /// <param name="eventDto">Набор данных необходимых для обновления сущевствующего события</param>
+    /// <response code="200">Возвращается JSON-структура ApiBaseResult с флагом обновлено событие или нет
+    /// и HTTP статус-кодом 200 Ok в случае успеха</response>
     [HttpPut]
     public ApiBaseResult UpdateEvent([FromBody] EventDto eventDto)
     {
@@ -63,6 +89,12 @@ public class EventsController : ControllerBase
         };
     }
 
+    /// <summary>
+    /// Метод удаляет сущевствующее событие
+    /// </summary>
+    /// <param name="id">Индекс удаляемого события</param>
+    /// <response code="200">Возвращается JSON-структура ApiBaseResult с флагом удалено событие или нет
+    /// и HTTP статус-кодом 200 Ok в случае успеха</response>
     [HttpDelete("{id}")]
     public ApiBaseResult DeleteEvent(int id)
     {
