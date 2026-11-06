@@ -15,6 +15,7 @@ public class EventsController : ControllerBase
 {
     private readonly IEventService _eventService;
 
+    /// <inheritdoc />
     public EventsController(IEventService eventService)
     {
         _eventService = eventService;

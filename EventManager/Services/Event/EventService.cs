@@ -2,21 +2,27 @@ using EventManager.Models.Event;
 
 namespace EventManager.Services.Events;
 
+/// <summary>
+/// Сервис работы с событиями
+/// </summary>
 public class EventService : IEventService
 {
     // Static is temp solution for save data between requests without singleton service
     private static List<Event> _events = new ();
-    
+
+    /// <inheritdoc />
     public List<Event> GetAllEvents()
     {
         return _events.Select(eventModel => new Event(eventModel)).ToList();
     }
 
-    public Event GetEventById(int id)
+    /// <inheritdoc />
+    public Event? GetEventById(int id)
     {
         return _events.FirstOrDefault(eventModel => eventModel.Id.Equals(id));
     }
 
+    /// <inheritdoc />
     public bool CreateEvent(EventDto eventDto)
     {
         var eventModel = FindEventByFields(eventDto);
@@ -28,13 +34,14 @@ public class EventService : IEventService
         return false;
     }
 
+    /// <inheritdoc />
     public bool UpdateEvent(EventDto eventDto)
     {
         var eventModel = GetEventById(eventDto.Id);
         if (eventModel != null)
         {
             eventModel.Title = eventDto.Title;
-            eventModel.Description = eventDto.Description;
+            eventModel.Description = eventDto.Description ?? "";
             eventModel.StartAt = eventDto.StartAt;
             eventModel.EndAt = eventDto.EndAt;
             return true;
@@ -42,6 +49,7 @@ public class EventService : IEventService
         return false;
     }
 
+    /// <inheritdoc />
     public bool DeleteEvent(int id)
     {
         var eventModel = GetEventById(id);

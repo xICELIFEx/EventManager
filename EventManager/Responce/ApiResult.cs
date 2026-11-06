@@ -7,7 +7,10 @@ namespace EventManager.Responce;
 /// </summary>
 public class ApiResult<T> : ApiBaseResult
 {
-    public required T Data { get; set; }
+    /// <summary>
+    /// Результат работы запроса
+    /// </summary>
+    public required T? Data { get; set; }
 }
 
 /// <summary>

@@ -8,11 +8,13 @@ public class DateGreaterThanAttribute : ValidationAttribute
 {
     private readonly string _comparisonProperty;
 
+    /// <inheritdoc />
     public DateGreaterThanAttribute(string comparisonProperty)
     {
         _comparisonProperty = comparisonProperty;
     }
 
+    /// <inheritdoc />
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
     {
         var property = validationContext.ObjectType.GetProperty(_comparisonProperty);
