@@ -4,8 +4,8 @@ namespace EventManager.Services.Events;
 
 public class EventService : IEventService
 {
-    
-    private List<Event> _events = new ();
+    // Static is temp solution for save data between requests without singleton service
+    private static List<Event> _events = new ();
     
     public List<Event> GetAllEvents()
     {
@@ -30,7 +30,7 @@ public class EventService : IEventService
 
     public bool UpdateEvent(EventDto eventDto)
     {
-        var eventModel = FindEventByFields(eventDto);
+        var eventModel = GetEventById(eventDto.Id);
         if (eventModel != null)
         {
             eventModel.Title = eventDto.Title;
