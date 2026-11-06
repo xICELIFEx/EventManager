@@ -1,4 +1,6 @@
+using System.Net;
 using EventManager.Models.Event;
+using EventManager.Responce;
 using EventManager.Services.Events;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,44 +11,68 @@ namespace EventManager.Controllers;
 public class EventsController : ControllerBase
 {
     private readonly IEventService _eventService;
-    
+
     public EventsController(IEventService eventService)
     {
         _eventService = eventService;
     }
 
     [HttpGet]
-    public IActionResult GetAllEvents()
+    public ApiBaseResult GetAllEvents()
     {
-        return Ok(_eventService.GetAllEvents().Select(e => e.ToDto()).ToList());
+        return new ApiResult<List<EventDto>>()
+            { Data = _eventService.GetAllEvents().Select(e => e.ToDto()).ToList(), StatusCode = HttpStatusCode.OK, Message = "" };
     }
 
     [HttpGet("{id}")]
-    public IActionResult GetEventById(int id)
+    public ApiBaseResult GetEventById(int id)
     {
-        var eventFound = _eventService.GetEventById(id);
-        if (eventFound != null) return Ok(eventFound.ToDto());
-        return NotFound();
+        var responce = new ApiResult<EventDto>() { Data = _eventService.GetEventById(id)?.ToDto(), StatusCode = HttpStatusCode.OK, Message = "" };
+        if (responce.Data == null)
+        {
+            responce.StatusCode = HttpStatusCode.NotFound;
+            responce.Message = $"Event with id {id} not found";
+        }
+
+        return responce;
     }
 
     [HttpPost]
-    public IActionResult CreateEvent([FromBody] EventDto eventDto)
+    public ApiBaseResult CreateEvent([FromBody] EventDto eventDto)
     {
-        if (_eventService.CreateEvent(eventDto)) return Ok();
-        return BadRequest();
+        var isCreated = _eventService.CreateEvent(eventDto);
+        return new ApiResult<bool>()
+        {
+            Data = isCreated, StatusCode = isCreated ? HttpStatusCode.OK : HttpStatusCode.BadRequest,
+            Message = isCreated
+                ? ""
+                : $"Event with data {{Title:{eventDto.Title},Description:{eventDto.Description},StartAt:{eventDto.StartAt},EndAt:{eventDto.EndAt}}} not created."
+        };
     }
 
     [HttpPut]
-    public IActionResult UpdateEvent([FromBody] EventDto eventDto)
+    public ApiBaseResult UpdateEvent([FromBody] EventDto eventDto)
     {
-        if (_eventService.UpdateEvent(eventDto)) return Ok();
-        return NotFound();
+        var isUpdated = _eventService.UpdateEvent(eventDto);
+        return new ApiResult<bool>()
+        {
+            Data = isUpdated, StatusCode = isUpdated ? HttpStatusCode.OK : HttpStatusCode.NotFound,
+            Message = isUpdated
+                ? ""
+                : $"Event with id {eventDto.Id} not Found"
+        };
     }
 
     [HttpDelete("{id}")]
-    public IActionResult DeleteEvent(int id)
+    public ApiBaseResult DeleteEvent(int id)
     {
-        if (_eventService.DeleteEvent(id)) return Ok();
-        return NotFound();
+        var isDeleted = _eventService.DeleteEvent(id);
+        return new ApiResult<bool>()
+        {
+            Data = isDeleted, StatusCode = isDeleted ? HttpStatusCode.OK : HttpStatusCode.NotFound,
+            Message = isDeleted
+                ? ""
+                : $"Event with id {id} not Found"
+        };
     }
 }
