@@ -75,17 +75,18 @@ public class EventsController : ControllerBase
     /// <summary>
     /// Метод обновляет сущевствующее событие
     /// </summary>
+    /// <param name="id">Параметр id, указывает на обновляемое событие</param>
     /// <param name="eventDto">Набор данных необходимых для обновления сущевствующего события</param>
     /// <response code="200">Возвращается JSON-структура ApiBaseResult с флагом обновлено событие или нет
     /// и HTTP статус-кодом 200 Ok в случае успеха</response>
-    [HttpPut]
-    public ActionResult<ApiResult<bool>> UpdateEvent([FromBody] EventDto eventDto)
+    [HttpPut("{id}")]
+    public ActionResult<ApiResult<bool>> UpdateEvent([FromRoute] int id, [FromBody] EventDto eventDto)
     {
-        var isUpdated = _eventService.UpdateEvent(eventDto);
+        var isUpdated = _eventService.UpdateEvent(id, eventDto);
         if (isUpdated)
             return Ok(new ApiResult<bool>() { Data = isUpdated, Message = "" });
         else
-            return NotFound(new ApiResult<bool>() { Data = isUpdated, Message = $"Event with id {eventDto.Id} not Found" });
+            return NotFound(new ApiResult<bool>() { Data = isUpdated, Message = $"Event with id {id} not Found" });
     }
 
     /// <summary>

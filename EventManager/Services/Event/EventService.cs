@@ -28,22 +28,25 @@ public class EventService : IEventService
         var eventModel = FindEventByFields(eventDto);
         if (eventModel == null)
         {
-            _events.Add(new Event(eventDto.Title, eventDto.Description, eventDto.StartAt, eventDto.EndAt));
+            // model already validated, check used for remove warnings
+            if (eventDto is { StartAt: not null, EndAt: not null })
+                _events.Add(new Event(eventDto.Title, eventDto.Description, eventDto.StartAt.Value, eventDto.EndAt.Value));
             return true;
         }
         return false;
     }
 
     /// <inheritdoc />
-    public bool UpdateEvent(EventDto eventDto)
+    public bool UpdateEvent(int id, EventDto eventDto)
     {
-        var eventModel = GetEventById(eventDto.Id);
-        if (eventModel != null)
+        var eventModel = GetEventById(id);
+        // model already validated, check used for remove warnings
+        if (eventModel != null && eventDto is { StartAt: not null, EndAt: not null })
         {
             eventModel.Title = eventDto.Title;
             eventModel.Description = eventDto.Description ?? "";
-            eventModel.StartAt = eventDto.StartAt;
-            eventModel.EndAt = eventDto.EndAt;
+            eventModel.StartAt = eventDto.StartAt.Value;
+            eventModel.EndAt = eventDto.EndAt.Value;
             return true;
         }
         return false;

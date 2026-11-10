@@ -5,13 +5,8 @@ namespace EventManager.Models.Event;
 /// <summary>
 /// DTO модели события
 /// </summary>
-public class EventDto
+public class EventDto : IValidatableObject
 {
-    /// <summary>
-    /// Id события
-    /// </summary>
-    public int Id { get; set; }
-
     /// <summary>
     /// Название события
     /// </summary>
@@ -26,13 +21,26 @@ public class EventDto
     /// <summary>
     /// Начало события
     /// </summary>
-    [Required(ErrorMessage = "Start date is required")]
-    public DateTime StartAt { get; set; }
+    public DateTime? StartAt { get; set; }
     
     /// <summary>
     /// Конец события
     /// </summary>
-    [Required(ErrorMessage = "End date is required")]
     [DateGreaterThan(nameof(StartAt), ErrorMessage = "End date must be greater then StartAt.")]
-    public DateTime EndAt { get; set; }
+    public DateTime? EndAt { get; set; }
+
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        var validationResults = new List<ValidationResult>();
+        if (StartAt == null)
+        {
+            validationResults.Add(new ValidationResult("Start date is required", new[] { nameof(StartAt) }));
+        }
+        
+        if (EndAt == null)
+        {
+            validationResults.Add(new ValidationResult("End date is required", new[] { nameof(EndAt) }));
+        }
+        return validationResults;
+    }
 }

@@ -5,7 +5,7 @@ namespace EventManager.Models.Event;
 /// </summary>
 public class Event
 {
-    private static int _nextId = 0;
+    private static int _nextId = 1;
     
     /// <summary>
     /// Id события
@@ -62,7 +62,6 @@ public class Event
     {
         return new EventDto
         {
-            Id = Id,
             Title = Title,
             Description = Description,
             StartAt = StartAt,
