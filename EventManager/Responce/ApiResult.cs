@@ -19,10 +19,6 @@ public class ApiResult<T> : ApiBaseResult
 public class ApiBaseResult
 {
     /// <summary>
-    /// Возвращаемый HTTP-код
-    /// </summary>
-    public required HttpStatusCode StatusCode { get; set; }
-    /// <summary>
     /// Кастомное сообщение с дополнительной информацией
     /// Здесь может быть информация об ошибке в случае неуспеха
     /// </summary>
