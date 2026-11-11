@@ -41,8 +41,8 @@
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Возвращается JSON-структура `ApiResult<List<EventDto>>` со списком событий
-            и HTTP статус-кодом `200 Ok` в случае успеха|[EventDtoListApiResult](#schemaeventdtolistapiresult)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Возвращается JSON-структура `ApiResult<List<EventResponseDto>>` со списком событий
+            и HTTP статус-кодом `200 Ok` в случае успеха|[EventResponseDtoListApiResult](#schemaeventresponsedtolistapiresult)|
 
 <aside class="success">
 This operation does not require authentication
@@ -60,7 +60,6 @@ This operation does not require authentication
 
 ```json
 {
-  "id": 0,
   "title": "string",
   "description": "string",
   "startAt": "2019-08-24T14:15:22Z",
@@ -72,7 +71,7 @@ This operation does not require authentication
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[EventDto](#schemaeventdto)|false|Набор данных необходимых для создания нового события|
+|body|body|[EventRequestDto](#schemaeventrequestdto)|false|Набор данных необходимых для создания нового события|
 
 > Example responses
 
@@ -141,10 +140,10 @@ This operation does not require authentication
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Возвращается JSON-структура `ApiResult<EventDto>` с информацией о событии
-            и HTTP статус-кодом `200 Ok` в случае успеха|[EventDtoApiResult](#schemaeventdtoapiresult)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Возвращается JSON-структура `ApiResult<EventDto>` с сообщением о том что событие не найдено
-            и HTTP статус-кодом `404 NotFound` в случае не удачи|[EventDtoApiResult](#schemaeventdtoapiresult)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Возвращается JSON-структура `ApiResult<EventResponseDto>` с информацией о событии
+            и HTTP статус-кодом `200 Ok` в случае успеха|[EventResponseDtoApiResult](#schemaeventresponsedtoapiresult)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Возвращается JSON-структура `ApiResult<EventResponseDto>` с сообщением о том что событие не найдено
+            и HTTP статус-кодом `404 NotFound` в случае не удачи|[EventResponseDtoApiResult](#schemaeventresponsedtoapiresult)|
 
 <aside class="success">
 This operation does not require authentication
@@ -162,7 +161,6 @@ This operation does not require authentication
 
 ```json
 {
-  "id": 0,
   "title": "string",
   "description": "string",
   "startAt": "2019-08-24T14:15:22Z",
@@ -175,7 +173,7 @@ This operation does not require authentication
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |id|path|integer(int32)|true|Параметр id, указывает на обновляемое событие|
-|body|body|[EventDto](#schemaeventdto)|false|Набор данных необходимых для обновления сущевствующего события|
+|body|body|[EventRequestDto](#schemaeventrequestdto)|false|Набор данных необходимых для обновления сущевствующего события|
 
 > Example responses
 
@@ -273,12 +271,40 @@ This operation does not require authentication
 |message|string¦null|true|none|Кастомное сообщение с дополнительной информацией<br>Здесь может быть информация об ошибке в случае неуспеха|
 |data|boolean|true|none|Результат работы запроса|
 
-<h2 id="tocS_EventDto">EventDto</h2>
+<h2 id="tocS_EventRequestDto">EventRequestDto</h2>
 <!-- backwards compatibility -->
-<a id="schemaeventdto"></a>
-<a id="schema_EventDto"></a>
-<a id="tocSeventdto"></a>
-<a id="tocseventdto"></a>
+<a id="schemaeventrequestdto"></a>
+<a id="schema_EventRequestDto"></a>
+<a id="tocSeventrequestdto"></a>
+<a id="tocseventrequestdto"></a>
+
+```json
+{
+  "title": "string",
+  "description": "string",
+  "startAt": "2019-08-24T14:15:22Z",
+  "endAt": "2019-08-24T14:15:22Z"
+}
+
+```
+
+DTO входной модели события
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|title|string|true|none|Название события|
+|description|string|true|none|Описание события|
+|startAt|string(date-time)¦null|false|none|Начало события|
+|endAt|string(date-time)¦null|false|none|Конец события|
+
+<h2 id="tocS_EventResponseDto">EventResponseDto</h2>
+<!-- backwards compatibility -->
+<a id="schemaeventresponsedto"></a>
+<a id="schema_EventResponseDto"></a>
+<a id="tocSeventresponsedto"></a>
+<a id="tocseventresponsedto"></a>
 
 ```json
 {
@@ -291,7 +317,7 @@ This operation does not require authentication
 
 ```
 
-DTO модели события
+DTO выходной модели события
 
 ### Properties
 
@@ -303,12 +329,12 @@ DTO модели события
 |startAt|string(date-time)¦null|false|none|Начало события|
 |endAt|string(date-time)¦null|false|none|Конец события|
 
-<h2 id="tocS_EventDtoApiResult">EventDtoApiResult</h2>
+<h2 id="tocS_EventResponseDtoApiResult">EventResponseDtoApiResult</h2>
 <!-- backwards compatibility -->
-<a id="schemaeventdtoapiresult"></a>
-<a id="schema_EventDtoApiResult"></a>
-<a id="tocSeventdtoapiresult"></a>
-<a id="tocseventdtoapiresult"></a>
+<a id="schemaeventresponsedtoapiresult"></a>
+<a id="schema_EventResponseDtoApiResult"></a>
+<a id="tocSeventresponsedtoapiresult"></a>
+<a id="tocseventresponsedtoapiresult"></a>
 
 ```json
 {
@@ -331,14 +357,14 @@ DTO модели события
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |message|string¦null|true|none|Кастомное сообщение с дополнительной информацией<br>Здесь может быть информация об ошибке в случае неуспеха|
-|data|[EventDto](#schemaeventdto)|true|none|DTO модели события|
+|data|[EventResponseDto](#schemaeventresponsedto)|true|none|DTO выходной модели события|
 
-<h2 id="tocS_EventDtoListApiResult">EventDtoListApiResult</h2>
+<h2 id="tocS_EventResponseDtoListApiResult">EventResponseDtoListApiResult</h2>
 <!-- backwards compatibility -->
-<a id="schemaeventdtolistapiresult"></a>
-<a id="schema_EventDtoListApiResult"></a>
-<a id="tocSeventdtolistapiresult"></a>
-<a id="tocseventdtolistapiresult"></a>
+<a id="schemaeventresponsedtolistapiresult"></a>
+<a id="schema_EventResponseDtoListApiResult"></a>
+<a id="tocSeventresponsedtolistapiresult"></a>
+<a id="tocseventresponsedtolistapiresult"></a>
 
 ```json
 {
@@ -363,5 +389,5 @@ DTO модели события
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |message|string¦null|true|none|Кастомное сообщение с дополнительной информацией<br>Здесь может быть информация об ошибке в случае неуспеха|
-|data|[[EventDto](#schemaeventdto)]¦null|true|none|Результат работы запроса|
+|data|[[EventResponseDto](#schemaeventresponsedto)]¦null|true|none|Результат работы запроса|
 

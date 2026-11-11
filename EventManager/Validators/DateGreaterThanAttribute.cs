@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
+namespace EventManager.Validators;
+
 /// <summary>
 /// Use AI for write validation attribute
 /// </summary>

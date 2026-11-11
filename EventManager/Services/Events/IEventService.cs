@@ -12,25 +12,29 @@ public interface IEventService
     /// </summary>
     /// <returns></returns>
     List<Event> GetAllEvents();
+
     /// <summary>
     /// Получение события по id
     /// </summary>
     /// <param name="id">id события</param>
     /// <returns></returns>
     Event? GetEventById(int id);
+
     /// <summary>
     /// Создание нового события
     /// </summary>
-    /// <param name="eventDto">данные для создания события</param>
+    /// <param name="eventRequestDto">данные для создания события</param>
     /// <returns></returns>
-    bool CreateEvent(EventDto eventDto);
+    bool CreateEvent(EventRequestDto eventRequestDto);
+
     /// <summary>
     /// Обновление сущевствующего события
     /// </summary>
     /// <param name="id">id события</param>
-    /// <param name="eventDto">данные для обновления события</param>
+    /// <param name="eventRequestDto">данные для обновления события</param>
     /// <returns></returns>
-    bool UpdateEvent(int id, EventDto eventDto);
+    bool UpdateEvent(int id, EventRequestDto eventRequestDto);
+
     /// <summary>
     /// Удаление сущевствующего события
     /// </summary>

@@ -1,11 +1,12 @@
 using System.ComponentModel.DataAnnotations;
+using EventManager.Validators;
 
 namespace EventManager.Models.Event;
 
 /// <summary>
-/// DTO модели события
+/// DTO выходной модели события
 /// </summary>
-public class EventDto : IValidatableObject
+public class EventResponseDto : IValidatableObject
 {
     /// <summary>
     /// Id события
@@ -23,12 +24,12 @@ public class EventDto : IValidatableObject
     /// </summary>
     [Required(AllowEmptyStrings = true, ErrorMessage = "Description is required")]
     public string Description { get; set; } = "";
-    
+
     /// <summary>
     /// Начало события
     /// </summary>
     public DateTime? StartAt { get; set; }
-    
+
     /// <summary>
     /// Конец события
     /// </summary>
@@ -43,11 +44,12 @@ public class EventDto : IValidatableObject
         {
             validationResults.Add(new ValidationResult("Start date is required", new[] { nameof(StartAt) }));
         }
-        
+
         if (EndAt == null)
         {
             validationResults.Add(new ValidationResult("End date is required", new[] { nameof(EndAt) }));
         }
+
         return validationResults;
     }
 }

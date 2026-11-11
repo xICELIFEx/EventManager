@@ -1,6 +1,4 @@
-using System.Net;
-
-namespace EventManager.Responce;
+namespace EventManager.Response;
 
 /// <summary>
 /// Класс результата с данными полученными в результате выполнения запроса
@@ -23,4 +21,4 @@ public class ApiBaseResult
     /// Здесь может быть информация об ошибке в случае неуспеха
     /// </summary>
     public required string Message { get; set; }
-} 
+}

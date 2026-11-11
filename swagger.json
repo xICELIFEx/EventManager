@@ -13,21 +13,21 @@
         "summary": "Метод возвращает информацию обо всех хранящихся событиях",
         "responses": {
           "200": {
-            "description": "Возвращается JSON-структура `ApiResult<List<EventDto>>` со списком событий\r\n            и HTTP статус-кодом `200 Ok` в случае успеха",
+            "description": "Возвращается JSON-структура `ApiResult<List<EventResponseDto>>` со списком событий\r\n            и HTTP статус-кодом `200 Ok` в случае успеха",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/EventDtoListApiResult"
+                  "$ref": "#/components/schemas/EventResponseDtoListApiResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EventDtoListApiResult"
+                  "$ref": "#/components/schemas/EventResponseDtoListApiResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EventDtoListApiResult"
+                  "$ref": "#/components/schemas/EventResponseDtoListApiResult"
                 }
               }
             }
@@ -44,17 +44,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EventDto"
+                "$ref": "#/components/schemas/EventRequestDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/EventDto"
+                "$ref": "#/components/schemas/EventRequestDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/EventDto"
+                "$ref": "#/components/schemas/EventRequestDto"
               }
             }
           }
@@ -123,41 +123,41 @@
         ],
         "responses": {
           "200": {
-            "description": "Возвращается JSON-структура `ApiResult<EventDto>` с информацией о событии\r\n            и HTTP статус-кодом `200 Ok` в случае успеха",
+            "description": "Возвращается JSON-структура `ApiResult<EventResponseDto>` с информацией о событии\r\n            и HTTP статус-кодом `200 Ok` в случае успеха",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/EventDtoApiResult"
+                  "$ref": "#/components/schemas/EventResponseDtoApiResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EventDtoApiResult"
+                  "$ref": "#/components/schemas/EventResponseDtoApiResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EventDtoApiResult"
+                  "$ref": "#/components/schemas/EventResponseDtoApiResult"
                 }
               }
             }
           },
           "404": {
-            "description": "Возвращается JSON-структура `ApiResult<EventDto>` с сообщением о том что событие не найдено\r\n            и HTTP статус-кодом `404 NotFound` в случае не удачи",
+            "description": "Возвращается JSON-структура `ApiResult<EventResponseDto>` с сообщением о том что событие не найдено\r\n            и HTTP статус-кодом `404 NotFound` в случае не удачи",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/EventDtoApiResult"
+                  "$ref": "#/components/schemas/EventResponseDtoApiResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EventDtoApiResult"
+                  "$ref": "#/components/schemas/EventResponseDtoApiResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EventDtoApiResult"
+                  "$ref": "#/components/schemas/EventResponseDtoApiResult"
                 }
               }
             }
@@ -186,17 +186,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EventDto"
+                "$ref": "#/components/schemas/EventRequestDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/EventDto"
+                "$ref": "#/components/schemas/EventRequestDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/EventDto"
+                "$ref": "#/components/schemas/EventRequestDto"
               }
             }
           }
@@ -328,7 +328,39 @@
         "additionalProperties": false,
         "description": "Класс результата с данными полученными в результате выполнения запроса"
       },
-      "EventDto": {
+      "EventRequestDto": {
+        "required": [
+          "description",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Название события"
+          },
+          "description": {
+            "type": "string",
+            "description": "Описание события"
+          },
+          "startAt": {
+            "type": "string",
+            "description": "Начало события",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endAt": {
+            "type": "string",
+            "description": "Конец события",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "DTO входной модели события"
+      },
+      "EventResponseDto": {
         "required": [
           "description",
           "title"
@@ -363,9 +395,9 @@
           }
         },
         "additionalProperties": false,
-        "description": "DTO модели события"
+        "description": "DTO выходной модели события"
       },
-      "EventDtoApiResult": {
+      "EventResponseDtoApiResult": {
         "required": [
           "data",
           "message"
@@ -378,13 +410,13 @@
             "nullable": true
           },
           "data": {
-            "$ref": "#/components/schemas/EventDto"
+            "$ref": "#/components/schemas/EventResponseDto"
           }
         },
         "additionalProperties": false,
         "description": "Класс результата с данными полученными в результате выполнения запроса"
       },
-      "EventDtoListApiResult": {
+      "EventResponseDtoListApiResult": {
         "required": [
           "data",
           "message"
@@ -399,7 +431,7 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/EventDto"
+              "$ref": "#/components/schemas/EventResponseDto"
             },
             "description": "Результат работы запроса",
             "nullable": true

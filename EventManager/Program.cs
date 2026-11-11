@@ -14,7 +14,6 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(xmlPath);
 });
 
-//TODO: move to extend method
 builder.Services.AddScoped<IEventService, EventService>();
 
 var app = builder.Build();
@@ -28,10 +27,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
 
 app.MapControllers();
 

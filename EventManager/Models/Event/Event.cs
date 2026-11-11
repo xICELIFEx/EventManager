@@ -6,23 +6,27 @@ namespace EventManager.Models.Event;
 public class Event
 {
     private static int _nextId = 1;
-    
+
     /// <summary>
     /// Id события
     /// </summary>
     public int Id { get; }
+
     /// <summary>
     /// Название события
     /// </summary>
     public string Title { get; set; }
+
     /// <summary>
     /// Описание события
     /// </summary>
     public string Description { get; set; }
+
     /// <summary>
     /// Начало события
     /// </summary>
     public DateTime StartAt { get; set; }
+
     /// <summary>
     /// Конец события
     /// </summary>
@@ -36,15 +40,19 @@ public class Event
     /// <param name="startAt">Начало события</param>
     /// <param name="endAt">Конец события</param>
     public Event(string title, string description, DateTime startAt, DateTime endAt)
-        : this (_nextId++, title, description, startAt, endAt) {}
-    
+        : this(_nextId++, title, description, startAt, endAt)
+    {
+    }
+
     /// <summary>
     /// Конструктор копирования
     /// </summary>
     /// <param name="sourceEvent">источник данных</param>
     public Event(Event sourceEvent)
-        : this (sourceEvent.Id, sourceEvent.Title, sourceEvent.Description, sourceEvent.StartAt, sourceEvent.EndAt) {}
-    
+        : this(sourceEvent.Id, sourceEvent.Title, sourceEvent.Description, sourceEvent.StartAt, sourceEvent.EndAt)
+    {
+    }
+
     private Event(int id, string title, string description, DateTime startAt, DateTime endAt)
     {
         Id = id;
@@ -53,14 +61,14 @@ public class Event
         StartAt = startAt;
         EndAt = endAt;
     }
-        
+
     /// <summary>
     /// метод преобразования модели в DTO
     /// </summary>
     /// <returns>Заполненый DTO объект</returns>
-    public EventDto ToDto()
+    public EventResponseDto ToDto()
     {
-        return new EventDto
+        return new EventResponseDto
         {
             Id = Id,
             Title = Title,
