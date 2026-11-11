@@ -17,12 +17,12 @@ public class EventDto : IValidatableObject
     /// </summary>
     [Required(AllowEmptyStrings = false, ErrorMessage = "Title is required")]
     public required string Title { get; set; }
-    
+
     /// <summary>
     /// Описание события
     /// </summary>
     [Required(AllowEmptyStrings = true, ErrorMessage = "Description is required")]
-    public string Description { get; set; }
+    public string Description { get; set; } = "";
     
     /// <summary>
     /// Начало события
