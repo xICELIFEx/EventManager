@@ -8,6 +8,11 @@ namespace EventManager.Models.Event;
 public class EventDto : IValidatableObject
 {
     /// <summary>
+    /// Id события
+    /// </summary>
+    public int Id { get; set; }
+
+    /// <summary>
     /// Название события
     /// </summary>
     [Required(AllowEmptyStrings = false, ErrorMessage = "Title is required")]
@@ -16,7 +21,8 @@ public class EventDto : IValidatableObject
     /// <summary>
     /// Описание события
     /// </summary>
-    public string? Description { get; set; }
+    [Required(AllowEmptyStrings = true, ErrorMessage = "Description is required")]
+    public string Description { get; set; }
     
     /// <summary>
     /// Начало события
@@ -29,6 +35,7 @@ public class EventDto : IValidatableObject
     [DateGreaterThan(nameof(StartAt), ErrorMessage = "End date must be greater then StartAt.")]
     public DateTime? EndAt { get; set; }
 
+    /// <inheritdoc />
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
         var validationResults = new List<ValidationResult>();

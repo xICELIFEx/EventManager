@@ -27,6 +27,7 @@ public interface IEventService
     /// <summary>
     /// Обновление сущевствующего события
     /// </summary>
+    /// <param name="id">id события</param>
     /// <param name="eventDto">данные для обновления события</param>
     /// <returns></returns>
     bool UpdateEvent(int id, EventDto eventDto);

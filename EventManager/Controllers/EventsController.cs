@@ -23,9 +23,10 @@ public class EventsController : ControllerBase
     /// <summary>
     /// Метод возвращает информацию обо всех хранящихся событиях
     /// </summary>
-    /// <response code="200">Возвращается JSON-структура ApiBaseResult со списком событий
-    /// и HTTP статус-кодом 200 Ok в случае успеха</response>
+    /// <response code="200">Возвращается JSON-структура <c><![CDATA[ApiResult<List<EventDto>>]]></c> со списком событий
+    /// и HTTP статус-кодом <c>200 Ok</c> в случае успеха</response>
     [HttpGet]
+    [ProducesResponseType<ApiResult<List<EventDto>>>(statusCode:StatusCodes.Status200OK)]
     public ActionResult<ApiResult<List<EventDto>>> GetAllEvents()
     {
         return Ok(new ApiResult<List<EventDto>>()
@@ -36,9 +37,13 @@ public class EventsController : ControllerBase
     /// Метод возвращает информацию о событии по его id
     /// </summary>
     /// <param name="id">Параметр id, для получения информации о связанном событии</param>
-    /// <response code="200">Возвращается JSON-структура ApiBaseResult с информацией о событии
-    /// и HTTP статус-кодом 200 Ok в случае успеха</response>
+    /// <response code="200">Возвращается JSON-структура <c><![CDATA[ApiResult<EventDto>]]></c> с информацией о событии
+    /// и HTTP статус-кодом <c>200 Ok</c> в случае успеха</response>
+    /// <response code="404">Возвращается JSON-структура <c><![CDATA[ApiResult<EventDto>]]></c> с сообщением о том что событие не найдено
+    /// и HTTP статус-кодом <c>404 NotFound</c> в случае не удачи</response>
     [HttpGet("{id}")]
+    [ProducesResponseType<ApiResult<EventDto>>(statusCode:StatusCodes.Status200OK)]
+    [ProducesResponseType<ApiResult<EventDto>>(statusCode:StatusCodes.Status404NotFound)]
     public ActionResult<ApiResult<EventDto>> GetEventById(int id)
     {
         var responce = new ApiResult<EventDto>() { Data = _eventService.GetEventById(id)?.ToDto(), Message = "" };
@@ -55,9 +60,13 @@ public class EventsController : ControllerBase
     /// Метод создает новое событие
     /// </summary>
     /// <param name="eventDto">Набор данных необходимых для создания нового события</param>
-    /// <response code="201">Возвращается JSON-структура ApiBaseResult с флагом создано событие или нет
-    /// и HTTP статус-кодом 201 Created в случае успеха</response>
+    /// <response code="201">Возвращается JSON-структура <c><![CDATA[ApiResult<bool>]]></c> с флагом создано событие или нет
+    /// и HTTP статус-кодом <c>201 Created</c> в случае успеха</response>
+    /// <response code="400">Возвращается JSON-структура <c><![CDATA[ApiResult<bool>]]></c> с флагом создано событие или нет
+    /// и HTTP статус-кодом <c>400 BadRequest</c> в случае не удачи</response>
     [HttpPost]
+    [ProducesResponseType<ApiResult<bool>>(statusCode:StatusCodes.Status201Created)]
+    [ProducesResponseType<ApiResult<bool>>(statusCode:StatusCodes.Status400BadRequest)]
     public ActionResult<ApiResult<bool>> CreateEvent([FromBody] EventDto eventDto)
     {
         var isCreated = _eventService.CreateEvent(eventDto);
@@ -77,9 +86,13 @@ public class EventsController : ControllerBase
     /// </summary>
     /// <param name="id">Параметр id, указывает на обновляемое событие</param>
     /// <param name="eventDto">Набор данных необходимых для обновления сущевствующего события</param>
-    /// <response code="200">Возвращается JSON-структура ApiBaseResult с флагом обновлено событие или нет
-    /// и HTTP статус-кодом 200 Ok в случае успеха</response>
+    /// <response code="200">Возвращается JSON-структура <c><![CDATA[ApiResult<bool>]]></c> с флагом обновлено событие или нет
+    /// и HTTP статус-кодом <c>200 Ok</c> в случае успеха</response>
+    /// <response code="404">Возвращается JSON-структура <c><![CDATA[ApiResult<bool>]]></c> с флагом обновлено событие или нет
+    /// и HTTP статус-кодом <c>404 NotFound</c> в случае не удачи</response>
     [HttpPut("{id}")]
+    [ProducesResponseType<ApiResult<bool>>(statusCode:StatusCodes.Status200OK)]
+    [ProducesResponseType<ApiResult<bool>>(statusCode:StatusCodes.Status404NotFound)]
     public ActionResult<ApiResult<bool>> UpdateEvent([FromRoute] int id, [FromBody] EventDto eventDto)
     {
         var isUpdated = _eventService.UpdateEvent(id, eventDto);
@@ -93,9 +106,13 @@ public class EventsController : ControllerBase
     /// Метод удаляет сущевствующее событие
     /// </summary>
     /// <param name="id">Индекс удаляемого события</param>
-    /// <response code="200">Возвращается JSON-структура ApiBaseResult с флагом удалено событие или нет
-    /// и HTTP статус-кодом 200 Ok в случае успеха</response>
+    /// <response code="200">Возвращается JSON-структура <c><![CDATA[ApiResult<bool>]]></c> с флагом обновлено событие или нет
+    /// и HTTP статус-кодом <c>200 Ok</c> в случае успеха</response>
+    /// <response code="404">Возвращается JSON-структура <c><![CDATA[ApiResult<bool>]]></c> с флагом обновлено событие или нет
+    /// и HTTP статус-кодом <c>404 NotFound</c> в случае не удачи</response>
     [HttpDelete("{id}")]
+    [ProducesResponseType<ApiResult<bool>>(statusCode:StatusCodes.Status200OK)]
+    [ProducesResponseType<ApiResult<bool>>(statusCode:StatusCodes.Status404NotFound)]
     public ActionResult<ApiResult<bool>> DeleteEvent(int id)
     {
         var isDeleted = _eventService.DeleteEvent(id);

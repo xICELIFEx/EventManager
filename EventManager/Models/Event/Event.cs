@@ -35,8 +35,8 @@ public class Event
     /// <param name="description">Описание события</param>
     /// <param name="startAt">Начало события</param>
     /// <param name="endAt">Конец события</param>
-    public Event(string title, string? description, DateTime startAt, DateTime endAt)
-        : this (_nextId++, title, description ?? "", startAt, endAt) {}
+    public Event(string title, string description, DateTime startAt, DateTime endAt)
+        : this (_nextId++, title, description, startAt, endAt) {}
     
     /// <summary>
     /// Конструктор копирования
@@ -62,6 +62,7 @@ public class Event
     {
         return new EventDto
         {
+            Id = Id,
             Title = Title,
             Description = Description,
             StartAt = StartAt,
