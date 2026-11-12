@@ -108,13 +108,19 @@ Accept: text/plain
 > 201 Response
 
 ```
-{"message":"string","data":true}
+{"message":"string","data":{"id":0,"title":"string","description":"string","startAt":"2019-08-24T14:15:22Z","endAt":"2019-08-24T14:15:22Z"}}
 ```
 
 ```json
 {
   "message": "string",
-  "data": true
+  "data": {
+    "id": 0,
+    "title": "string",
+    "description": "string",
+    "startAt": "2019-08-24T14:15:22Z",
+    "endAt": "2019-08-24T14:15:22Z"
+  }
 }
 ```
 
@@ -123,9 +129,9 @@ Accept: text/plain
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Возвращается JSON-структура `ApiResult<EventResponseDto>` с созданым событием
-            и HTTP статус-кодом `201 Created` в случае успеха|[BooleanApiResult](#schemabooleanapiresult)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Возвращается JSON-структура `ApiResult<EventResponseDto>` без события
-            и HTTP статус-кодом `400 BadRequest` в случае не удачи|[BooleanApiResult](#schemabooleanapiresult)|
+            и HTTP статус-кодом `201 Created` в случае успеха|[EventResponseDtoApiResult](#schemaeventresponsedtoapiresult)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Возвращается JSON-структура `ProblemDetails` с описанием проблемы
+            и HTTP статус-кодом `400 BadRequest` в случае не удачи|[ProblemDetails](#schemaproblemdetails)|
 
 <aside class="success">
 This operation does not require authentication
@@ -186,8 +192,8 @@ Accept: text/plain
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Возвращается JSON-структура `ApiResult<EventResponseDto>` с информацией о событии
             и HTTP статус-кодом `200 Ok` в случае успеха|[EventResponseDtoApiResult](#schemaeventresponsedtoapiresult)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Возвращается JSON-структура `ApiResult<EventResponseDto>` с сообщением о том что событие не найдено
-            и HTTP статус-кодом `404 NotFound` в случае не удачи|[EventResponseDtoApiResult](#schemaeventresponsedtoapiresult)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Возвращается JSON-структура `ProblemDetails` с описанием возникшей при получении события проблемы
+            и HTTP статус-кодом `404 NotFound` в случае не удачи|[ProblemDetails](#schemaproblemdetails)|
 
 <aside class="success">
 This operation does not require authentication
@@ -256,8 +262,8 @@ Accept: text/plain
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Возвращается JSON-структура `ApiResult<bool>` с флагом обновлено событие или нет
             и HTTP статус-кодом `200 Ok` в случае успеха|[BooleanApiResult](#schemabooleanapiresult)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Возвращается JSON-структура `ApiResult<bool>` с флагом обновлено событие или нет
-            и HTTP статус-кодом `404 NotFound` в случае не удачи|[BooleanApiResult](#schemabooleanapiresult)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Возвращается JSON-структура `ProblemDetails` с описанием возникшей при обновлении проблемы
+            и HTTP статус-кодом `404 NotFound` в случае не удачи|[ProblemDetails](#schemaproblemdetails)|
 
 <aside class="success">
 This operation does not require authentication
@@ -312,8 +318,8 @@ Accept: text/plain
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Возвращается JSON-структура `ApiResult<bool>` с флагом обновлено событие или нет
             и HTTP статус-кодом `200 Ok` в случае успеха|[BooleanApiResult](#schemabooleanapiresult)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Возвращается JSON-структура `ApiResult<bool>` с флагом обновлено событие или нет
-            и HTTP статус-кодом `404 NotFound` в случае не удачи|[BooleanApiResult](#schemabooleanapiresult)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Возвращается JSON-структура `ProblemDetails` с описанием возникшей при удалении проблемы
+            и HTTP статус-кодом `404 NotFound` в случае не удачи|[ProblemDetails](#schemaproblemdetails)|
 
 <aside class="success">
 This operation does not require authentication
@@ -464,4 +470,35 @@ DTO выходной модели события
 |---|---|---|---|---|
 |message|string¦null|true|none|Кастомное сообщение с дополнительной информацией<br>Здесь может быть информация об ошибке в случае неуспеха|
 |data|[[EventResponseDto](#schemaeventresponsedto)]¦null|true|none|Результат работы запроса|
+
+<h2 id="tocS_ProblemDetails">ProblemDetails</h2>
+<!-- backwards compatibility -->
+<a id="schemaproblemdetails"></a>
+<a id="schema_ProblemDetails"></a>
+<a id="tocSproblemdetails"></a>
+<a id="tocsproblemdetails"></a>
+
+```json
+{
+  "type": "string",
+  "title": "string",
+  "status": 0,
+  "detail": "string",
+  "instance": "string",
+  "property1": null,
+  "property2": null
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|**additionalProperties**|any|false|none|none|
+|type|string¦null|false|none|none|
+|title|string¦null|false|none|none|
+|status|integer(int32)¦null|false|none|none|
+|detail|string¦null|false|none|none|
+|instance|string¦null|false|none|none|
 

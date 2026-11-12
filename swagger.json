@@ -65,37 +65,37 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/BooleanApiResult"
+                  "$ref": "#/components/schemas/EventResponseDtoApiResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BooleanApiResult"
+                  "$ref": "#/components/schemas/EventResponseDtoApiResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BooleanApiResult"
+                  "$ref": "#/components/schemas/EventResponseDtoApiResult"
                 }
               }
             }
           },
           "400": {
-            "description": "Возвращается JSON-структура `ApiResult<EventResponseDto>` без события\r\n            и HTTP статус-кодом `400 BadRequest` в случае не удачи",
+            "description": "Возвращается JSON-структура `ProblemDetails` с описанием проблемы\r\n            и HTTP статус-кодом `400 BadRequest` в случае не удачи",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/BooleanApiResult"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BooleanApiResult"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BooleanApiResult"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -143,21 +143,21 @@
             }
           },
           "404": {
-            "description": "Возвращается JSON-структура `ApiResult<EventResponseDto>` с сообщением о том что событие не найдено\r\n            и HTTP статус-кодом `404 NotFound` в случае не удачи",
+            "description": "Возвращается JSON-структура `ProblemDetails` с описанием возникшей при получении события проблемы\r\n            и HTTP статус-кодом `404 NotFound` в случае не удачи",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/EventResponseDtoApiResult"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EventResponseDtoApiResult"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EventResponseDtoApiResult"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -223,21 +223,21 @@
             }
           },
           "404": {
-            "description": "Возвращается JSON-структура `ApiResult<bool>` с флагом обновлено событие или нет\r\n            и HTTP статус-кодом `404 NotFound` в случае не удачи",
+            "description": "Возвращается JSON-структура `ProblemDetails` с описанием возникшей при обновлении проблемы\r\n            и HTTP статус-кодом `404 NotFound` в случае не удачи",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/BooleanApiResult"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BooleanApiResult"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BooleanApiResult"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -283,21 +283,21 @@
             }
           },
           "404": {
-            "description": "Возвращается JSON-структура `ApiResult<bool>` с флагом обновлено событие или нет\r\n            и HTTP статус-кодом `404 NotFound` в случае не удачи",
+            "description": "Возвращается JSON-структура `ProblemDetails` с описанием возникшей при удалении проблемы\r\n            и HTTP статус-кодом `404 NotFound` в случае не удачи",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/BooleanApiResult"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BooleanApiResult"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BooleanApiResult"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -439,6 +439,33 @@
         },
         "additionalProperties": false,
         "description": "Класс результата с данными полученными в результате выполнения запроса"
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
       }
     }
   },

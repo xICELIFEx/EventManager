@@ -11,7 +11,7 @@
 2. Найти в контекстном меню проекта EventManager команду Run и выполнить её
 
 ## Тест API
-В проекте доступен [Swagger](https://localhost:7138/swagger/index.html)
+В проекте доступен [Swagger](http://localhost:5262/swagger/index.html)
 
 На данный момент Swagger доступен только в дев сборке
 
