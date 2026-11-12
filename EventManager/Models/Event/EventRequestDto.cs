@@ -17,7 +17,6 @@ public class EventRequestDto : IValidatableObject
     /// <summary>
     /// Описание события
     /// </summary>
-    [Required(AllowEmptyStrings = true, ErrorMessage = "Description is required")]
     public string Description { get; set; } = "";
 
     /// <summary>

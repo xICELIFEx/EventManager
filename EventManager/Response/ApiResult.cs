@@ -10,15 +10,3 @@ public class ApiResult<T> : ApiBaseResult
     /// </summary>
     public required T? Data { get; set; }
 }
-
-/// <summary>
-/// Базовый класс с основными возвращаемыми параметрами
-/// </summary>
-public class ApiBaseResult
-{
-    /// <summary>
-    /// Кастомное сообщение с дополнительной информацией
-    /// Здесь может быть информация об ошибке в случае неуспеха
-    /// </summary>
-    public required string Message { get; set; }
-}

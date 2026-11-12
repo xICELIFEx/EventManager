@@ -33,7 +33,7 @@ public interface IEventService
     /// <param name="id">id события</param>
     /// <param name="eventRequestDto">данные для обновления события</param>
     /// <returns></returns>
-    bool UpdateEvent(int id, EventRequestDto eventRequestDto);
+    Event? UpdateEvent(int id, EventRequestDto eventRequestDto);
 
     /// <summary>
     /// Удаление сущевствующего события

@@ -330,7 +330,6 @@
       },
       "EventRequestDto": {
         "required": [
-          "description",
           "title"
         ],
         "type": "object",
@@ -342,7 +341,8 @@
           },
           "description": {
             "type": "string",
-            "description": "Описание события"
+            "description": "Описание события",
+            "nullable": true
           },
           "startAt": {
             "type": "string",
@@ -373,25 +373,24 @@
             "format": "int32"
           },
           "title": {
-            "minLength": 1,
             "type": "string",
-            "description": "Название события"
+            "description": "Название события",
+            "nullable": true
           },
           "description": {
             "type": "string",
-            "description": "Описание события"
+            "description": "Описание события",
+            "nullable": true
           },
           "startAt": {
             "type": "string",
             "description": "Начало события",
-            "format": "date-time",
-            "nullable": true
+            "format": "date-time"
           },
           "endAt": {
             "type": "string",
             "description": "Конец события",
-            "format": "date-time",
-            "nullable": true
+            "format": "date-time"
           }
         },
         "additionalProperties": false,

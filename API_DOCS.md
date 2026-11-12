@@ -375,7 +375,7 @@ DTO входной модели события
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |title|string|true|none|Название события|
-|description|string|true|none|Описание события|
+|description|string¦null|false|none|Описание события|
 |startAt|string(date-time)¦null|false|none|Начало события|
 |endAt|string(date-time)¦null|false|none|Конец события|
 
@@ -404,10 +404,10 @@ DTO выходной модели события
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |id|integer(int32)|false|none|Id события|
-|title|string|true|none|Название события|
-|description|string|true|none|Описание события|
-|startAt|string(date-time)¦null|false|none|Начало события|
-|endAt|string(date-time)¦null|false|none|Конец события|
+|title|string¦null|true|none|Название события|
+|description|string¦null|true|none|Описание события|
+|startAt|string(date-time)|false|none|Начало события|
+|endAt|string(date-time)|false|none|Конец события|
 
 <h2 id="tocS_EventResponseDtoApiResult">EventResponseDtoApiResult</h2>
 <!-- backwards compatibility -->

@@ -43,7 +43,7 @@ public class EventService : IEventService
     }
 
     /// <inheritdoc />
-    public bool UpdateEvent(int id, EventRequestDto eventRequestDto)
+    public Event? UpdateEvent(int id, EventRequestDto eventRequestDto)
     {
         var eventModel = FindEventById(id);
         // model already validated, check used for remove warnings
@@ -53,10 +53,10 @@ public class EventService : IEventService
             eventModel.Description = eventRequestDto.Description ?? "";
             eventModel.StartAt = eventRequestDto.StartAt.Value;
             eventModel.EndAt = eventRequestDto.EndAt.Value;
-            return true;
+            return eventModel;
         }
 
-        return false;
+        return null;
     }
 
     /// <inheritdoc />
