@@ -1,0 +1,23 @@
+@EventManager_HostAddress = http://localhost:5262
+
+### Получить список всех событий
+GET {{EventManager_HostAddress}}/api/Events
+Accept: application/json
+
+### Получить событие по ID
+GET {{EventManager_HostAddress}}/api/Events/1
+Accept: application/json
+
+### Создать новое событие
+POST {{EventManager_HostAddress}}/api/Events
+Content-Type: application/json
+
+{
+  "title": "Встреча команды",
+  "description": "Обсуждение задач на спринт",
+  "startAt": "2026-11-12T10:00:00Z",
+  "endAt": "2026-11-12T11:00:00Z"
+}
+
+### Удалить событие
+DELETE {{EventManager_HostAddress}}/api/Events/1
