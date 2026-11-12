@@ -25,7 +25,7 @@ public interface IEventService
     /// </summary>
     /// <param name="eventRequestDto">данные для создания события</param>
     /// <returns></returns>
-    bool CreateEvent(EventRequestDto eventRequestDto);
+    Event? CreateEvent(EventRequestDto eventRequestDto);
 
     /// <summary>
     /// Обновление сущевствующего события

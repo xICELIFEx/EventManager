@@ -24,19 +24,22 @@ public class EventService : IEventService
     }
 
     /// <inheritdoc />
-    public bool CreateEvent(EventRequestDto eventRequestDto)
+    public Event? CreateEvent(EventRequestDto eventRequestDto)
     {
         var eventModel = FindEventByFields(eventRequestDto);
         if (eventModel == null)
         {
             // model already validated, check used for remove warnings
             if (eventRequestDto is { StartAt: not null, EndAt: not null })
-                _events.Add(new Event(eventRequestDto.Title, eventRequestDto.Description, eventRequestDto.StartAt.Value,
-                    eventRequestDto.EndAt.Value));
-            return true;
+            {
+                eventModel = new Event(eventRequestDto.Title, eventRequestDto.Description, eventRequestDto.StartAt.Value,
+                    eventRequestDto.EndAt.Value);
+                _events.Add(eventModel);
+                return eventModel;
+            }
         }
 
-        return false;
+        return null;
     }
 
     /// <inheritdoc />

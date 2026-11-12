@@ -61,7 +61,7 @@
         },
         "responses": {
           "201": {
-            "description": "Возвращается JSON-структура `ApiResult<bool>` с флагом создано событие или нет\r\n            и HTTP статус-кодом `201 Created` в случае успеха",
+            "description": "Возвращается JSON-структура `ApiResult<EventResponseDto>` с созданым событием\r\n            и HTTP статус-кодом `201 Created` в случае успеха",
             "content": {
               "text/plain": {
                 "schema": {
@@ -81,7 +81,7 @@
             }
           },
           "400": {
-            "description": "Возвращается JSON-структура `ApiResult<bool>` с флагом создано событие или нет\r\n            и HTTP статус-кодом `400 BadRequest` в случае не удачи",
+            "description": "Возвращается JSON-структура `ApiResult<EventResponseDto>` без события\r\n            и HTTP статус-кодом `400 BadRequest` в случае не удачи",
             "content": {
               "text/plain": {
                 "schema": {

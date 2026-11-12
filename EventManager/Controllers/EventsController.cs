@@ -59,22 +59,22 @@ public class EventsController : ControllerBase
     /// Метод создает новое событие
     /// </summary>
     /// <param name="eventRequestDto">Набор данных необходимых для создания нового события</param>
-    /// <response code="201">Возвращается JSON-структура <c><![CDATA[ApiResult<bool>]]></c> с флагом создано событие или нет
+    /// <response code="201">Возвращается JSON-структура <c><![CDATA[ApiResult<EventResponseDto>]]></c> с созданым событием
     /// и HTTP статус-кодом <c>201 Created</c> в случае успеха</response>
-    /// <response code="400">Возвращается JSON-структура <c><![CDATA[ApiResult<bool>]]></c> с флагом создано событие или нет
+    /// <response code="400">Возвращается JSON-структура <c><![CDATA[ApiResult<EventResponseDto>]]></c> без события
     /// и HTTP статус-кодом <c>400 BadRequest</c> в случае не удачи</response>
     [HttpPost]
     [ProducesResponseType<ApiResult<bool>>(statusCode: StatusCodes.Status201Created)]
     [ProducesResponseType<ApiResult<bool>>(statusCode: StatusCodes.Status400BadRequest)]
-    public ActionResult<ApiResult<bool>> CreateEvent([FromBody] EventRequestDto eventRequestDto)
+    public ActionResult<ApiResult<EventResponseDto>> CreateEvent([FromBody] EventRequestDto eventRequestDto)
     {
-        var isCreated = _eventService.CreateEvent(eventRequestDto);
-        if (isCreated)
-            return CreatedAtAction("CreateEvent", new ApiResult<bool>() { Data = isCreated, Message = "" });
+        var createdEvent = _eventService.CreateEvent(eventRequestDto);
+        if (createdEvent != null)
+            return CreatedAtAction("CreateEvent", new ApiResult<EventResponseDto>() { Data = createdEvent.ToDto(), Message = "" });
         else
-            return BadRequest(new ApiResult<bool>()
+            return BadRequest(new ApiResult<EventResponseDto>()
             {
-                Data = isCreated,
+                Data = null,
                 Message =
                     $"Event with data {{Title:{eventRequestDto.Title},Description:{eventRequestDto.Description},StartAt:{eventRequestDto.StartAt},EndAt:{eventRequestDto.EndAt}}} not created."
             });

@@ -10,6 +10,20 @@
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X GET /api/Events \
+  -H 'Accept: text/plain'
+
+```
+
+```http
+GET /api/Events HTTP/1.1
+
+Accept: text/plain
+
+```
+
 `GET /api/Events`
 
 *Метод возвращает информацию обо всех хранящихся событиях*
@@ -52,6 +66,22 @@ This operation does not require authentication
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X POST /api/Events \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: text/plain'
+
+```
+
+```http
+POST /api/Events HTTP/1.1
+
+Content-Type: application/json
+Accept: text/plain
+
+```
+
 `POST /api/Events`
 
 *Метод создает новое событие*
@@ -92,9 +122,9 @@ This operation does not require authentication
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Возвращается JSON-структура `ApiResult<bool>` с флагом создано событие или нет
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Возвращается JSON-структура `ApiResult<EventResponseDto>` с созданым событием
             и HTTP статус-кодом `201 Created` в случае успеха|[BooleanApiResult](#schemabooleanapiresult)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Возвращается JSON-структура `ApiResult<bool>` с флагом создано событие или нет
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Возвращается JSON-структура `ApiResult<EventResponseDto>` без события
             и HTTP статус-кодом `400 BadRequest` в случае не удачи|[BooleanApiResult](#schemabooleanapiresult)|
 
 <aside class="success">
@@ -104,6 +134,20 @@ This operation does not require authentication
 ## get__api_Events_{id}
 
 > Code samples
+
+```shell
+# You can also use wget
+curl -X GET /api/Events/{id} \
+  -H 'Accept: text/plain'
+
+```
+
+```http
+GET /api/Events/{id} HTTP/1.1
+
+Accept: text/plain
+
+```
 
 `GET /api/Events/{id}`
 
@@ -152,6 +196,22 @@ This operation does not require authentication
 ## put__api_Events_{id}
 
 > Code samples
+
+```shell
+# You can also use wget
+curl -X PUT /api/Events/{id} \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: text/plain'
+
+```
+
+```http
+PUT /api/Events/{id} HTTP/1.1
+
+Content-Type: application/json
+Accept: text/plain
+
+```
 
 `PUT /api/Events/{id}`
 
@@ -206,6 +266,20 @@ This operation does not require authentication
 ## delete__api_Events_{id}
 
 > Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE /api/Events/{id} \
+  -H 'Accept: text/plain'
+
+```
+
+```http
+DELETE /api/Events/{id} HTTP/1.1
+
+Accept: text/plain
+
+```
 
 `DELETE /api/Events/{id}`
 
