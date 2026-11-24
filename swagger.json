@@ -1,0 +1,476 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "EventManager, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Events": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Метод возвращает информацию обо всех хранящихся событиях",
+        "responses": {
+          "200": {
+            "description": "Возвращается JSON-структура `ApiResult<List<EventResponseDto>>` со списком событий\r\n            и HTTP статус-кодом `200 Ok` в случае успеха",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventResponseDtoListApiResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventResponseDtoListApiResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventResponseDtoListApiResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Метод создает новое событие",
+        "requestBody": {
+          "description": "Набор данных необходимых для создания нового события",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Возвращается JSON-структура `ApiResult<EventResponseDto>` с созданым событием\r\n            и HTTP статус-кодом `201 Created` в случае успеха",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventResponseDtoApiResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventResponseDtoApiResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventResponseDtoApiResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Возвращается JSON-структура `ProblemDetails` с описанием проблемы\r\n            и HTTP статус-кодом `400 BadRequest` в случае не удачи",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Events/{id}": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Метод возвращает информацию о событии по его id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Параметр id, для получения информации о связанном событии",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Возвращается JSON-структура `ApiResult<EventResponseDto>` с информацией о событии\r\n            и HTTP статус-кодом `200 Ok` в случае успеха",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventResponseDtoApiResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventResponseDtoApiResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventResponseDtoApiResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Возвращается JSON-структура `ProblemDetails` с описанием возникшей при получении события проблемы\r\n            и HTTP статус-кодом `404 NotFound` в случае не удачи",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Метод обновляет сущевствующее событие",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Параметр id, указывает на обновляемое событие",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Набор данных необходимых для обновления сущевствующего события",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Возвращается JSON-структура `ApiResult<bool>` с флагом обновлено событие или нет\r\n            и HTTP статус-кодом `200 Ok` в случае успеха",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Возвращается JSON-структура `ProblemDetails` с описанием возникшей при обновлении проблемы\r\n            и HTTP статус-кодом `404 NotFound` в случае не удачи",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Метод удаляет сущевствующее событие",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Индекс удаляемого события",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Возвращается JSON-структура `ApiResult<bool>` с флагом обновлено событие или нет\r\n            и HTTP статус-кодом `200 Ok` в случае успеха",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Возвращается JSON-структура `ProblemDetails` с описанием возникшей при удалении проблемы\r\n            и HTTP статус-кодом `404 NotFound` в случае не удачи",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BooleanApiResult": {
+        "required": [
+          "data",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Кастомное сообщение с дополнительной информацией\r\nЗдесь может быть информация об ошибке в случае неуспеха",
+            "nullable": true
+          },
+          "data": {
+            "type": "boolean",
+            "description": "Результат работы запроса"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Класс результата с данными полученными в результате выполнения запроса"
+      },
+      "EventRequestDto": {
+        "required": [
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Название события"
+          },
+          "description": {
+            "type": "string",
+            "description": "Описание события",
+            "nullable": true
+          },
+          "startAt": {
+            "type": "string",
+            "description": "Начало события",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endAt": {
+            "type": "string",
+            "description": "Конец события",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "DTO входной модели события"
+      },
+      "EventResponseDto": {
+        "required": [
+          "description",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Id события",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "description": "Название события",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Описание события",
+            "nullable": true
+          },
+          "startAt": {
+            "type": "string",
+            "description": "Начало события",
+            "format": "date-time"
+          },
+          "endAt": {
+            "type": "string",
+            "description": "Конец события",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "description": "DTO выходной модели события"
+      },
+      "EventResponseDtoApiResult": {
+        "required": [
+          "data",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Кастомное сообщение с дополнительной информацией\r\nЗдесь может быть информация об ошибке в случае неуспеха",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/EventResponseDto"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Класс результата с данными полученными в результате выполнения запроса"
+      },
+      "EventResponseDtoListApiResult": {
+        "required": [
+          "data",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Кастомное сообщение с дополнительной информацией\r\nЗдесь может быть информация об ошибке в случае неуспеха",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventResponseDto"
+            },
+            "description": "Результат работы запроса",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Класс результата с данными полученными в результате выполнения запроса"
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Events"
+    }
+  ]
+}
